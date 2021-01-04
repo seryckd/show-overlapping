@@ -1,7 +1,5 @@
 # Overview
 
-| written to learn Python
-
 Show overlapping threads or api calls based on start time and duration
 
 Given an input file in the format 'start,end,id'
@@ -28,3 +26,7 @@ _generate-testdata.py_ provides testdata
 ```
 python3 generate-testdata.py --count 30 | python3 overlap.py
 ```
+
+# Notes
+
+Written as part of learning Python.
