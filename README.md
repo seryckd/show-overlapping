@@ -27,9 +27,19 @@ _generate-testdata.py_ provides testdata
 python3 generate-testdata.py --count 30 | python3 overlap.py
 ```
 
+unit cases
+
+* 0 duration; begin and end points are the same
+* two lines with the same begin point
+
+
 # Notes
 
 Written as part of learning Python.
+
+
+start,end,id
+
 
 
 
