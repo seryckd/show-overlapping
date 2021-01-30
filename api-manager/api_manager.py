@@ -12,20 +12,20 @@ A sample file is
 import sys
 from datetime import timedelta, datetime
 
-"""
-Looks for the named index in the list. Test for the index name surrounded
-by quotes first, if it is not present then the error will return the index name without quotes
-"""
 def find_idx(words, idx):
+    """
+    Looks for the named index in the list. Test for the index name surrounded
+    by quotes first, if it is not present then the error will return the index name without quotes
+    """
     try:
         return words.index('"' + idx + '"')
     except ValueError:
         return words.index(idx)
 
-"""
-Extracts data from the incoming and outputs the expected format
-"""
 def transform(input_stream, ignorePing=False):
+    """
+    Extracts data from the incoming and outputs the expected format
+    """
 
     # The first line is the list of columns available
     headers = next(input_stream)
@@ -59,10 +59,10 @@ def transform(input_stream, ignorePing=False):
             (start_time + duration).isoformat(), 
             words[idx_MessageId].strip('\"')))
     
-"""
-When run from the command line
-"""
 if __name__ == "__main__":
+    """
+    When run from the command line
+    """
     import argparse
 
     parser = argparse.ArgumentParser(description='Parse Mule Api Manager CSV Report')

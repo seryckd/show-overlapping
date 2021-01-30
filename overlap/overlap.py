@@ -78,10 +78,10 @@ def parse(input, showIds = False):
 
     print ("max-bucket ", max_overlap)
 
-"""
-When run the command line
-"""
 if __name__ == "__main__":
+    """
+    When run the command line
+    """
     import argparse
 
     parser = argparse.ArgumentParser(description='Count overlapping date ranges')

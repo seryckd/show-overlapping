@@ -29,26 +29,21 @@ Outputs lines in the form 'start, end, number of processes, list of each process
 2020-12-30T21:57:44.042572,2020-12-30T21:58:35.771572,51729,1,['id1']
 ```
 
-# Generate Test Data
+# Test
+
+## Generate Test Data
 
 _generate-testdata.py_ provides testdata
 
 ```
-python3 generate-testdata.py --count 30 | python3 overlap.py
+python3 test/generate-testdata.py --count 30 | python3 overlap/overlap.py
 ```
 
-unit cases
+## API Manager Test
 
-* 0 duration; begin and end points are the same
-* two lines with the same begin point
-
-
-# Notes
-
-Written as part of learning Python.
-
-
-start,end,id
+```
+cat test/api-input.csv | python3 api-manager/api_manager.py | python3 overlap/overlap.py
+```
 
 
 
