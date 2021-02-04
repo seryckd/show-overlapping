@@ -1,3 +1,9 @@
+# Show Overlapping
+
+* [Overview](#Overview)
+* [Test](#Test)
+* [Implementation](#Implementation)
+
 # Overview
 
 Determine the number of overlapping threads or api calls based upon the start time and end times and 
@@ -45,6 +51,52 @@ python3 test/generate-testdata.py --count 30 | python3 overlap/overlap.py
 cat test/api-input.csv | python3 api-manager/api_manager.py | python3 overlap/overlap.py
 ```
 
+# Implementation
 
+Consider 3 threads each of which run units of work. On this diagram, Thread 1 processes
+Work A, then pauses, then processes Work D.  Time passes from left to right.
 
+![threads](docs/threads.png "Threads")
 
+We can break up the time into buckets, where each bucket begins when a unit of work either
+starts or finishes. On this diagram there are 6 buckets.
+
+![buckets](docs/buckets.png "Buckets")
+
+Collect all the start and end points of each unit of work into an ordered list of timestamps
+
+```
+nodes = [
+    T1 = [Astart, Bstart], 
+    T2 = [Aend],
+    T3 = [Cstart],
+    ...
+    T7 = [Dend]
+]
+```
+Then create a bucket for each node 
+
+```
+for each node in nodes
+    bucket = copy of previous bucket
+    for each point in node
+        if point is start
+            add Work to the bucket
+        else // point is end
+            remove Work from the bucket
+```            
+
+Each bucket contains a list of Work that was performed.
+
+```
+bukets = [
+    [A, B],   // B1
+    [B],      // B2
+    [B, C],   // B3
+    [C],      // B4
+    [C, D],   // B5
+    [D]       // B6
+]
+```
+The bucket with the largest list represents the most parallism. By storing the start and end of 
+bucket you can also work out the duration of the buckets.
